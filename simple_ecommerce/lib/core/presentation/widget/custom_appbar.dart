@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/static/colors.dart';
-import 'package:simple_ecommerce/featured/home/controller/home_controller.dart';
+import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar(
@@ -18,7 +18,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  final controller = Get.find<HomeController>();
+  final controller = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -47,8 +47,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     right: 0,
                     top: -2,
                     child: Container(
+                      padding: EdgeInsets.all(1),
                       decoration: BoxDecoration(
-                          border: Border.all(color: orangeColor),
+                          borderRadius: BorderRadius.circular(20),
                           color: orangeColor),
                       child:
                           Obx(() => Text(controller.cartItem.value.toString())),

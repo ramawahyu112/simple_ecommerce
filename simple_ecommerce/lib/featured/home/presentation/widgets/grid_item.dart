@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce/core/core.dart';
+import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
 
 class GridItem extends StatelessWidget {
-  const GridItem({super.key, required this.onTap});
+  const GridItem(
+      {super.key,
+      required this.onTap,
+      required this.onItemTap,
+      required this.productModel});
   final Function() onTap;
+  final Function() onItemTap;
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(paddingSmall),
-      decoration: BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.circular(paddingMedium)),
+    return InkWell(
+      onTap: onItemTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network(
-            "https://asset.kompas.com/crops/PdKQ8JEec1uH477e64QGdeYVWWI=/28x0:612x389/750x500/data/photo/2021/03/29/6061aaa779b88.png",
-            height: 80,
-            fit: BoxFit.fill,
+          Expanded(
+            child: Image.network(
+              productModel.image,
+              fit: BoxFit.fill,
+            ),
           ),
+          mediumVerticalSpacing(),
+          Text(
+            productModel.title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          mediumVerticalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Elegant Design"),
-                  Text("200"),
-                ],
-              ),
+              Text(formatCurrency(productModel.price)),
               IconButton(
                 onPressed: onTap,
                 icon: Container(
+                    width: 200,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: orangeColor),
@@ -41,7 +48,7 @@ class GridItem extends StatelessWidget {
                     )),
               )
             ],
-          )
+          ),
         ],
       ),
     );

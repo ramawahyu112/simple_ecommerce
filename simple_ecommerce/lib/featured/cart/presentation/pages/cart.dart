@@ -25,7 +25,7 @@ class CartPage extends StatelessWidget {
                         topRight: Radius.circular(paddingLarge),
                         topLeft: Radius.circular(paddingLarge))),
                 child: Padding(
-                  padding: EdgeInsets.all(paddingMedium),
+                  padding: const EdgeInsets.all(paddingMedium),
                   child: Column(children: [
                     const Text("Eames Chair"),
                     SizedBox(
@@ -38,7 +38,7 @@ class CartPage extends StatelessWidget {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return Icon(Icons.star);
+                                return const Icon(Icons.star);
                               },
                               itemCount: 5,
                             ),
@@ -50,7 +50,7 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                     smallVerticalSpacing(),
-                    Text("Lorem ipsum"),
+                    const Text("Lorem ipsum"),
                   ]),
                 ),
               )
@@ -58,7 +58,7 @@ class CartPage extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         width: Get.width,
         child: FloatingActionButton(
           onPressed: () {},
@@ -67,24 +67,22 @@ class CartPage extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.heart_broken,
                 color: orangeColor,
               ),
             ),
             mediumHorizontalSpacing(),
             Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: orangeColor),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
               child: Padding(
                 padding: const EdgeInsets.all(paddingMedium),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.shopping_cart),
-                      smallHorizontalSpacing(),
-                      Text("Add to My Cart")
-                    ]),
+                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Icon(Icons.shopping_cart),
+                  smallHorizontalSpacing(),
+                  const Text("Add to My Cart")
+                ]),
               ),
             )
           ]),

@@ -4,40 +4,39 @@ class ProductResponseModel {
     required this.listProduct,
   });
   factory ProductResponseModel.fromJson(dynamic json) => ProductResponseModel(
-      listProduct:
-          List<ProductModel>.from(json.map((x) => ProductModel.fromJson(x))));
+      listProduct: List<ProductModel>.from(json["data"].map((x) => ProductModel.fromJson(x))));
 }
 
 class ProductModel {
   ProductModel({
     required this.id,
-    required this.title,
+    required this.productName,
     required this.price,
     required this.category,
     required this.description,
-    required this.image,
+    required this.photo,
   });
   int id;
-  String title;
+  String productName;
   dynamic price;
   String category;
   String description;
-  String image;
+  String photo;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
       id: json["id"],
-      title: json["title"],
+      productName: json["product_name"],
       price: json["price"],
       category: json["category"],
       description: json["description"],
-      image: json["image"]);
+      photo: json["photo"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "title": title,
+        "product_name": productName,
         "price": price,
         "category": category,
         "description": description,
-        "image": image,
+        "photo": photo,
       };
 }

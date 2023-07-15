@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:simple_ecommerce/core/static/colors.dart';
+import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar(
-      {super.key, this.isBack = false, this.isShoppingCart = true});
+  const CustomAppBar({super.key, this.isBack = false, this.isShoppingCart = true});
   final bool isBack;
   final bool isShoppingCart;
 
@@ -13,8 +13,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 20);
+  Size get preferredSize => Size.fromHeight(5.h);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -29,33 +28,39 @@ class _CustomAppBarState extends State<CustomAppBar> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: blackColor,
               ))
           : null,
+      toolbarHeight: 5.h,
       actions: [
-        IconButton(
-            onPressed: () {},
-            icon: Stack(
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: blackColor,
-                ),
-                Positioned(
-                    right: 0,
-                    top: -2,
-                    child: Container(
-                      padding: EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: orangeColor),
-                      child:
-                          Obx(() => Text(controller.cartItem.value.toString())),
-                    ))
-              ],
-            )),
+        // IconButton(
+        //     color: blackColor,
+        //     onPressed: () {},
+        //     icon:
+        Padding(
+          padding: const EdgeInsets.only(right: paddingMedium),
+          child: Stack(
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                color: blackColor,
+                size: 3.5.h,
+              ),
+              Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
+                    child: Obx(() => Text(controller.cartItem.value.toString())),
+                  ))
+            ],
+          ),
+        )
+        // ),
       ],
     );
   }

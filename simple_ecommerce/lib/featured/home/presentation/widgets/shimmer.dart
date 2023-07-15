@@ -22,6 +22,5 @@ class ShimmerWidget extends StatelessWidget {
             width: 200,
           ),
         ));
-    ;
   }
 }

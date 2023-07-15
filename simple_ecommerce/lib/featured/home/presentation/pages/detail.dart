@@ -1,87 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/core.dart';
+import 'package:simple_ecommerce/core/presentation/widget/app_container.dart';
+import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
+import 'package:sizer/sizer.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.productModel});
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(isBack: true),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            width: Get.width,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(paddingLarge),
-                    topLeft: Radius.circular(paddingLarge))),
-            child: Padding(
-              padding: const EdgeInsets.all(paddingMedium),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      productModel.title,
-                      style: headerTextStyle,
+    final controller = Get.find<CartController>();
+    return AppContainer(
+      isBack: true,
+      withNavigation: false,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: Get.width,
+          // decoration: const BoxDecoration(
+          //     borderRadius: BorderRadius.only(
+          //         topRight: Radius.circular(paddingLarge),
+          //         topLeft: Radius.circular(paddingLarge))),
+          child: Padding(
+            padding: const EdgeInsets.all(sizeSmall),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    productModel.productName,
+                    style: headerTextStyle,
+                  ),
+                  AspectRatio(
+                    aspectRatio: 1 / 1,
+                    child: Image.network(
+                      productModel.photo,
                     ),
-                    mediumVerticalSpacing(),
-                    Image.network(
-                      productModel.image,
-                      height: 300,
-                      width: 300,
+                  ),
+                  SizedBox(
+                    width: 100.w,
+                    height: 8.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return const Icon(
+                              Icons.star,
+                              color: orangeColor,
+                            );
+                          },
+                          itemCount: 5,
+                        ),
+                        const Text(
+                          "125 Reviews",
+                          style: startProductTextStyle,
+                        ),
+                      ],
                     ),
-                    mediumVerticalSpacing(),
-                    SizedBox(
-                      width: Get.width,
-                      height: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Icon(
-                                  Icons.star,
-                                  color: orangeColor,
-                                );
-                              },
-                              itemCount: 5,
-                            ),
-                          ),
-                          Text(
-                            "125 Reviews",
-                            style: startProductTextStyle,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      formatCurrency(productModel.price),
-                      style: productPriceTextStyle,
-                    ),
-                    smallVerticalSpacing(),
-                    Text(
-                      productModel.description,
-                      style: descriptionProductTextStyle,
-                    ),
-                  ]),
-            ),
+                  ),
+                  Text(
+                    formatCurrency(productModel.price),
+                    style: productPriceTextStyle,
+                  ),
+                  smallVerticalSpacing(),
+                  Text(
+                    productModel.description,
+                    style: descriptionProductTextStyle,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  )
+                ]),
           ),
         ),
       ),
-      floatingActionButton: Container(
-        width: Get.width - 30,
+      floatingActionButton: SizedBox(
+        width: 85.w,
         child: FloatingActionButton(
-          onPressed: () {},
+          isExtended: true,
+          onPressed: () async {
+            await controller.addProductToCart(
+                productModel.id.toString(), productModel.price.toString());
+          },
           child: Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: orangeColor),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Icon(Icons.shopping_cart),
               smallHorizontalSpacing(),

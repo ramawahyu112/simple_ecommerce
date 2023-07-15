@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/featured/home/data/data_source/product_datasource.dart';
+import 'package:simple_ecommerce/featured/home/data/model/category_model.dart';
 import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
 
 class HomeController extends GetxController {
   ProductDataSource productDataSource = ProductDataSource();
   List<ProductModel>? productModel = <ProductModel>[].obs;
-  List<dynamic> categoryProduct = <String>[].obs;
+  List<CategoryModel> categoryProduct = <CategoryModel>[].obs;
   final indexItem = 0.obs;
   final cartItem = 0.obs;
   final itemSelected = 0.obs;
@@ -28,10 +29,10 @@ class HomeController extends GetxController {
     isLoadingCategory.value = val;
   }
 
-  Future<ProductResponseModel?> getData() async {
+  Future<void> getData(String category) async {
     setLoading(true);
     try {
-      final result = await productDataSource.getDataProduct();
+      final result = await productDataSource.getDataProduct(category);
       productModel = result!.listProduct;
       setLoading(false);
     } catch (e) {
@@ -40,7 +41,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<ProductResponseModel?> getDataByCategory(String category) async {
+  Future<void> getDataByCategory(String category) async {
     setLoading(true);
     try {
       final result = await productDataSource.getDataProductByCategory(category);
@@ -56,8 +57,8 @@ class HomeController extends GetxController {
     setLoadingCategory(true);
     try {
       final result = await productDataSource.getCategory();
-      categoryProduct = result;
-      categoryProduct.insert(0, 'All');
+      categoryProduct = result.listCategory;
+      categoryProduct.insert(0, CategoryModel(id: 0, name: "All"));
       setLoadingCategory(false);
       //Add category all
     } catch (e) {
@@ -70,7 +71,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getCategory();
-    getData();
+    getData("0");
     super.onInit();
   }
 }

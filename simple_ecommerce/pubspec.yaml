@@ -39,6 +39,8 @@ dependencies:
   dio: ^5.1.2
   shimmer: ^2.0.0
   intl: ^0.18.1
+  loader_overlay: ^2.3.0
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:

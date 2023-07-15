@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
+import 'package:sizer/sizer.dart';
 
 class GridItem extends StatelessWidget {
   const GridItem(
-      {super.key,
-      required this.onTap,
-      required this.onItemTap,
-      required this.productModel});
+      {super.key, required this.onTap, required this.onItemTap, required this.productModel});
   final Function() onTap;
   final Function() onItemTap;
   final ProductModel productModel;
@@ -20,13 +18,13 @@ class GridItem extends StatelessWidget {
         children: [
           Expanded(
             child: Image.network(
-              productModel.image,
+              productModel.photo,
               fit: BoxFit.fill,
             ),
           ),
           mediumVerticalSpacing(),
           Text(
-            productModel.title,
+            productModel.productName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -34,15 +32,15 @@ class GridItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(formatCurrency(productModel.price)),
+              Text(formatCurrency(productModel.price), style: productPriceTextStyle),
               IconButton(
                 onPressed: onTap,
                 icon: Container(
-                    width: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: orangeColor),
-                    child: Icon(
+                    width: 10.w,
+                    height: 4.h,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
+                    child: const Icon(
                       Icons.add,
                       color: whiteColor,
                     )),

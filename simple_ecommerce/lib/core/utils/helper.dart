@@ -27,6 +27,6 @@ largeHorizontalSpacing() {
 }
 
 String formatCurrency(dynamic price) {
-  final formatDolar = NumberFormat.currency(symbol: '\$', decimalDigits: 2);
+  final formatDolar = NumberFormat.currency(symbol: '\$', decimalDigits: 0);
   return formatDolar.format(price);
 }

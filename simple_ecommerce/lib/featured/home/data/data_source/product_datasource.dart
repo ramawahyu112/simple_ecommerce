@@ -5,9 +5,7 @@ import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
 
 class ProductDataSource {
   late Dio dio = Dio(BaseOptions(
-      baseUrl: baseUrl,
-      contentType: 'application/json',
-      headers: {'Authorization': "Bearer 1|3hlTJus7wptj9kPuHiJq4g2P5imRbVEe6O5z0bn1"}));
+      baseUrl: baseUrl, contentType: 'application/json', headers: {'Authorization': token}));
   Future<ProductResponseModel?> getDataProduct(String category) async {
     try {
       final response = await dio.get("api/product/?category=$category");

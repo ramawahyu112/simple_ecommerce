@@ -10,12 +10,14 @@ class AppContainer extends StatelessWidget {
       this.isShoppingCart = true,
       this.withNavigation = true,
       required this.body,
-      this.floatingActionButton});
+      this.floatingActionButton,
+      this.buttonPosition});
   final bool isBack;
   final bool isShoppingCart;
   final bool withNavigation;
   final Widget body;
   final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? buttonPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class AppContainer extends StatelessWidget {
         ),
       ),
       floatingActionButton: floatingActionButton,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: buttonPosition ?? FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: withNavigation ? const BottomNavigation() : null,
     );
   }

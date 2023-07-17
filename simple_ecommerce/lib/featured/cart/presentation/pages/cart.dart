@@ -1,91 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/core.dart';
+import 'package:simple_ecommerce/core/presentation/widget/app_container.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
-import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
+import 'package:simple_ecommerce/featured/cart/presentation/widgets/cart_item.dart';
+import 'package:sizer/sizer.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key, required this.productModel});
-  final ProductModel productModel;
+  const CartPage({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<CartController>();
-    return Scaffold(
-      appBar: const CustomAppBar(isBack: true),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+    return AppContainer(
+      isBack: true,
+      isShoppingCart: false,
+      withNavigation: false,
+      body: SingleChildScrollView(
+        child: GetBuilder<CartController>(
+          builder: (controller) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: Get.height,
-                width: Get.width,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(paddingLarge),
-                        topLeft: Radius.circular(paddingLarge))),
-                child: Padding(
-                  padding: const EdgeInsets.all(paddingMedium),
-                  child: Column(children: [
-                    const Text("Eames Chair"),
-                    SizedBox(
-                      width: Get.width,
-                      height: 100,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return const Icon(Icons.star);
-                              },
-                              itemCount: 5,
-                            ),
-                          ),
-                          mediumHorizontalSpacing(),
-                          const Text("125 Reviews"),
-                          const Expanded(child: Text("280"))
-                        ],
+              Text(
+                "Shopping Cart",
+                style: titleTextStyle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              smallVerticalSpacing(),
+              Obx(
+                () => controller.listCart.isEmpty
+                    ? Container(
+                        height: 50.h,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "No Item Found",
+                          style: titleTextStyle,
+                        ),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.listCart.length,
+                        itemBuilder: (context, index) {
+                          final data = controller.listCart[index];
+                          return CartItem(index: index, data: data);
+                        },
                       ),
-                    ),
-                    smallVerticalSpacing(),
-                    const Text("Lorem ipsum"),
-                  ]),
-                ),
               )
             ],
           ),
-        ),
-      ),
-      floatingActionButton: SizedBox(
-        width: Get.width,
-        child: FloatingActionButton(
-          onPressed: () {},
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Icon(
-                Icons.heart_broken,
-                color: orangeColor,
-              ),
-            ),
-            mediumHorizontalSpacing(),
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
-              child: Padding(
-                padding: const EdgeInsets.all(paddingMedium),
-                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Icon(Icons.shopping_cart),
-                  smallHorizontalSpacing(),
-                  const Text("Add to My Cart")
-                ]),
-              ),
-            )
-          ]),
         ),
       ),
     );

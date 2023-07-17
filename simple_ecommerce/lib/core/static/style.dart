@@ -16,3 +16,39 @@ TextStyle productPriceTextStyle = TextStyle(
   color: blackColor,
   fontSize: 14.sp,
 );
+TextStyle dialogTitleTextStyle = TextStyle(
+  color: blackColor,
+  fontSize: 14.sp,
+);
+TextStyle dialogMessageTextStyle = TextStyle(
+  color: blackColor,
+  fontSize: 12.sp,
+);
+TextStyle dialogButtonTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 12.sp,
+);
+
+TextStyle normalTextStyleButton = TextStyle(
+  color: whiteColor,
+  fontSize: 12.sp,
+);
+
+TextStyle cartProductTextStyle = TextStyle(
+  color: blackColor,
+  fontSize: 14.sp,
+);
+
+TextStyle cartPriceTextStyle = TextStyle(
+  color: blackColor,
+  fontSize: 12.sp,
+);
+TextStyle counterTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 12.sp,
+);
+
+TextStyle titleTextStyle = TextStyle(
+  color: blackColor,
+  fontSize: 20.sp,
+);

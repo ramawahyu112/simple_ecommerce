@@ -35,32 +35,37 @@ class _CustomAppBarState extends State<CustomAppBar> {
           : null,
       toolbarHeight: 5.h,
       actions: [
-        // IconButton(
-        //     color: blackColor,
-        //     onPressed: () {},
-        //     icon:
-        Padding(
-          padding: const EdgeInsets.only(right: paddingMedium),
-          child: Stack(
-            children: [
-              Icon(
-                Icons.shopping_cart,
+        Visibility(
+          visible: widget.isShoppingCart,
+          child: Padding(
+            padding: const EdgeInsets.only(right: paddingMedium),
+            child: IconButton(
                 color: blackColor,
-                size: 3.5.h,
-              ),
-              Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 2),
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: orangeColor),
-                    child: Obx(() => Text(controller.cartItem.value.toString())),
-                  ))
-            ],
+                onPressed: () {
+                  Get.toNamed(cartPage);
+                },
+                icon: Stack(
+                  children: [
+                    Icon(
+                      Icons.shopping_cart,
+                      color: blackColor,
+                      size: 3.5.h,
+                    ),
+                    Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 0.2.h, horizontal: 1.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: orangeColor,
+                          ),
+                          child: Obx(() => Text(controller.cartItem.value.toString())),
+                        ))
+                  ],
+                )),
           ),
-        )
-        // ),
+        ),
       ],
     );
   }

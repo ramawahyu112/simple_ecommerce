@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce/core/core.dart';
+import 'package:simple_ecommerce/core/presentation/widget/custom_alert.dart';
 import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,7 +35,7 @@ class GridItem extends StatelessWidget {
             children: [
               Text(formatCurrency(productModel.price), style: productPriceTextStyle),
               IconButton(
-                onPressed: onTap,
+                onPressed: () {},
                 icon: Container(
                     width: 10.w,
                     height: 4.h,

@@ -84,7 +84,11 @@ class HomePage extends StatelessWidget {
                             );
                           },
                         )
-                      : const Center(child: Text("No Item Found")),
+                      : Center(
+                          child: Text(
+                          "No Item Found",
+                          style: titleTextStyle,
+                        )),
             ),
           ],
         ),

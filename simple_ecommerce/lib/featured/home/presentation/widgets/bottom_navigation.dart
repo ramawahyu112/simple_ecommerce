@@ -32,8 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             label: ""),
         const BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag), label: "Shopping bag"),
-        const BottomNavigationBarItem(
-            icon: Icon(Icons.person), label: "Profile"),
+        const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ];
   @override
   Widget build(BuildContext context) {

@@ -63,7 +63,6 @@ class HomeController extends GetxController {
       //Add category all
     } catch (e) {
       setLoadingCategory(false);
-
       rethrow;
     }
   }

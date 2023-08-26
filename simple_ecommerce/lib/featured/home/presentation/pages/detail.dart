@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/core.dart';
-import 'package:simple_ecommerce/core/presentation/widget/app_container.dart';
+import 'package:simple_ecommerce/core/presentation/widget/custom_alert.dart';
 import 'package:simple_ecommerce/core/presentation/widget/custom_button.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 import 'package:simple_ecommerce/featured/home/data/model/product_model.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../../core/presentation/widget/custom_alert.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.productModel});
@@ -15,9 +13,11 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<CartController>();
-    return AppContainer(
-      isBack: true,
-      withNavigation: false,
+    return Scaffold(
+      appBar: CustomAppBar(
+        isBack: true,
+        title: productModel.productName,
+      ),
       body: SingleChildScrollView(
         child: SizedBox(
           width: Get.width,
@@ -32,10 +32,10 @@ class ProductDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    productModel.productName,
-                    style: headerTextStyle,
-                  ),
+                  // Text(
+                  //   productModel.productName,
+                  //   style: headerTextStyle,
+                  // ),
                   AspectRatio(
                     aspectRatio: 1 / 1,
                     child: Image.network(
@@ -82,7 +82,7 @@ class ProductDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      buttonPosition: FloatingActionButtonLocation.startDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton: SizedBox(
         height: 5.h,
         width: 90.w,
@@ -93,7 +93,8 @@ class ProductDetailPage extends StatelessWidget {
               child: CustomButton(
                 onPressed: () async {
                   await controller
-                      .addProductToCart(productModel.id.toString(), productModel.price.toString())
+                      .addProductToCart(
+                          productModel.id.toString(), productModel.price.toString())
                       .then((value) async {
                     if (value == true) {
                       await controller.getProductCart().then((value) {
@@ -123,6 +124,7 @@ class ProductDetailPage extends StatelessWidget {
             ),
             mediumHorizontalSpacing(),
             CustomButton(
+                width: 15.w,
                 onPressed: () {},
                 buttonRadius: 12,
                 child: const Icon(

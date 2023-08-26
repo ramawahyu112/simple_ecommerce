@@ -25,6 +25,16 @@ class CartDataSource {
     }
   }
 
+  Future<dynamic> updateCart(Map<String, dynamic> data, int id) async {
+    try {
+      final response = await dio.post("api/cart/updateCart/$id", data: data);
+      print(response.data['message']);
+      return response.statusCode == 200;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<bool> removeCart(String id) async {
     try {
       final response = await dio.get("api/cart/delete/$id");

@@ -52,3 +52,8 @@ TextStyle titleTextStyle = TextStyle(
   color: blackColor,
   fontSize: 20.sp,
 );
+
+TextStyle loginTitleTextStyle =
+    TextStyle(color: whiteColor, fontSize: 22.sp, fontWeight: FontWeight.bold);
+TextStyle registerButtonTextStyle =
+    TextStyle(color: orangeColor, fontSize: 14.sp, fontWeight: FontWeight.bold);

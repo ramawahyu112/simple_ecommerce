@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/featured/home/presentation/pages/home.dart';
+import 'package:simple_ecommerce/featured/login/presentation/pages/login_page.dart';
 import 'package:sizer/sizer.dart';
 
 import 'core/core.dart';
@@ -19,11 +20,12 @@ class MyApp extends StatelessWidget {
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedItemColor: orangeColor,
             unselectedItemColor: Colors.black, // Warna item terpilih
-            showUnselectedLabels: true, // Menampilkan label untuk item tidak terpilih
+            showUnselectedLabels:
+                true, // Menampilkan label untuk item tidak terpilih
           ),
         ),
         getPages: routes(),
-        home: const HomePage(),
+        home: const LoginPage(),
       ),
     );
   }

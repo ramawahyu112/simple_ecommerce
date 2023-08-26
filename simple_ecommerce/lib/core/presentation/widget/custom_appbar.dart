@@ -5,9 +5,11 @@ import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, this.isBack = false, this.isShoppingCart = true});
+  const CustomAppBar(
+      {super.key, this.isBack = false, this.isShoppingCart = true, this.title = ""});
   final bool isBack;
   final bool isShoppingCart;
+  final String? title;
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -23,10 +25,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      title: Text(widget.title ?? "",
+          style: headerTextStyle, maxLines: 1, overflow: TextOverflow.ellipsis),
       leading: widget.isBack
           ? IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -55,12 +59,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         right: 0,
                         top: 0,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 0.2.h, horizontal: 1.w),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0.2.h, horizontal: 1.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: orangeColor,
                           ),
-                          child: Obx(() => Text(controller.cartItem.value.toString())),
+                          child:
+                              Obx(() => Text(controller.cartItem.value.toString())),
                         ))
                   ],
                 )),

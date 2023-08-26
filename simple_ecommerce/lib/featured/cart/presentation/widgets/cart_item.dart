@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/presentation/widget/custom_alert.dart';
+import 'package:simple_ecommerce/core/presentation/widget/custom_button.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 import 'package:simple_ecommerce/featured/cart/presentation/widgets/quantity_button.dart';
 
@@ -20,7 +21,8 @@ class CartItem extends GetView<CartController> {
       elevation: 2.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(sizeMedium)),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: sizeMedium, horizontal: sizeMedium),
+        padding:
+            const EdgeInsets.symmetric(vertical: sizeMedium, horizontal: sizeMedium),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -32,26 +34,55 @@ class CartItem extends GetView<CartController> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(data.productModel.productName,
-                    style: cartProductTextStyle, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    style: cartProductTextStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(formatCurrency(data.productModel.price),
-                        style: cartPriceTextStyle, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        style: cartPriceTextStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
                     IconButton(
-                        onPressed: () async {
-                          await controller.removeProductFromCart(data.id.toString()).then((value) {
-                            if (value) {
-                              showDialog(
-                                context: context,
-                                builder: (context) => const CustomAlert(
-                                    title: "Success",
-                                    message: "Delete product from cart successfully"),
-                              ).then((value) async {
-                                await controller.getProductCart();
-                              });
-                            }
-                          });
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (question) => CustomAlert(
+                                      title: "Are you sure remove this ?",
+                                      message: "Data will be removed permanently",
+                                      icon: Icons.warning_amber,
+                                      iconColor: orangeColor,
+                                      action: [
+                                        SingleButtonDialog(
+                                          onOk: () async {
+                                            print("sini");
+                                            await controller
+                                                .removeProductFromCart(
+                                                    data.id.toString())
+                                                .then((value) {
+                                              if (value) {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      const CustomAlert(
+                                                    title: "Success",
+                                                    message:
+                                                        "Delete product from cart successfully",
+                                                  ),
+                                                ).then((value) async {
+                                                  await controller.getProductCart();
+                                                  Navigator.pop(question);
+                                                });
+                                              }
+                                            });
+                                          },
+                                        ),
+                                        const SingleButtonDialog(
+                                          buttonText: "Cancel",
+                                          buttonColor: redColor,
+                                        ),
+                                      ]));
                         },
                         icon: const Icon(
                           Icons.close,

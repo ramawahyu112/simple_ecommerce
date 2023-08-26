@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 
 import '../../../../core/static/colors.dart';
@@ -8,6 +9,13 @@ import '../../../../core/static/style.dart';
 class QuantityButton extends GetView<CartController> {
   QuantityButton({super.key, required this.index});
   int index;
+
+  void updateCart() async {
+    final result = await controller.updateProductCart(index);
+    if (result) {
+      await controller.getProductCart();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +26,7 @@ class QuantityButton extends GetView<CartController> {
           IconButton(
               onPressed: () {
                 controller.decrement(index);
+                updateCart();
               },
               icon: const Icon(Icons.remove)),
           Expanded(
@@ -35,6 +44,7 @@ class QuantityButton extends GetView<CartController> {
           IconButton(
               onPressed: () {
                 controller.increment(index);
+                updateCart();
               },
               icon: const Icon(Icons.add)),
         ],

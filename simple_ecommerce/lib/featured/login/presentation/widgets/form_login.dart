@@ -14,43 +14,50 @@ class FormLogin extends StatelessWidget {
     return
         // Obx(() =>
         Form(
+            key: controller.keyLogin,
             child: Column(
-      children: [
-        largeVerticalSpacing(),
-        CustomTextField(labelText: "Email", controller: controller.emailController),
-        largeVerticalSpacing(),
-        CustomTextField(
-          labelText: "Password",
-          controller: controller.passwordController,
-          isPassword: true,
-        ),
-        mediumVerticalSpacing(),
-        Container(
-          alignment: Alignment.centerRight,
-          child: GestureDetector(onTap: () {}, child: Text("Forgot Password ?")),
-        ),
-        largeVerticalSpacing(),
-        CustomButton(
-            onPressed: () {
-              Get.toNamed(mainPage);
-            },
-            child: Text(
-              "Login",
-              style: dialogButtonTextStyle,
-            )),
-        Expanded(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Dont have an account ? "),
-            GestureDetector(
-              onTap: () {},
-              child: Text("Register", style: registerButtonTextStyle),
-            )
-          ],
-        ))
-      ],
-    ))
+              children: [
+                largeVerticalSpacing(),
+                CustomTextField(
+                    labelText: "Email", controller: controller.emailController),
+                largeVerticalSpacing(),
+                CustomTextField(
+                  labelText: "Password",
+                  controller: controller.passwordController,
+                  isPassword: true,
+                ),
+                mediumVerticalSpacing(),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                      onTap: () {}, child: Text("Forgot Password ?")),
+                ),
+                largeVerticalSpacing(),
+                CustomButton(
+                    onPressed: () {
+                      if (controller.keyLogin.currentState!.validate()) {
+                        controller.loginUser().then((value) {
+                          Get.toNamed(mainPage);
+                        });
+                      }
+                    },
+                    child: Text(
+                      "Login",
+                      style: dialogButtonTextStyle,
+                    )),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Dont have an account ? "),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text("Register", style: registerButtonTextStyle),
+                    )
+                  ],
+                ))
+              ],
+            ))
         // )
         ;
   }

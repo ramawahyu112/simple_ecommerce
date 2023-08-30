@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/core.dart';
-import 'package:simple_ecommerce/core/static/colors.dart';
 import 'package:simple_ecommerce/core/utils/session_helper.dart';
 import 'package:simple_ecommerce/featured/home/controller/home_controller.dart';
 

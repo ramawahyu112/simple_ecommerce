@@ -68,7 +68,7 @@ class FormLogin extends StatelessWidget {
                               },
                             );
                           } else if (state is LoginFailed) {
-                            final msg = (state as LoginFailed).msg;
+                            final msg = state.msg;
                             Get.snackbar(
                               "Error",
                               msg.toString(),

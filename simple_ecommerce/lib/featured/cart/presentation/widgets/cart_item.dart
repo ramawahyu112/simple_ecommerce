@@ -12,9 +12,9 @@ import '../../../../core/utils/helper.dart';
 import '../../data/model/cart_model.dart';
 
 class CartItem extends GetView<CartController> {
-  CartItem({required this.index, required this.data});
-  int index;
-  CartModel data;
+  const CartItem({super.key, required this.index, required this.data});
+  final int index;
+  final CartModel data;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -56,7 +56,7 @@ class CartItem extends GetView<CartController> {
                                       action: [
                                         SingleButtonDialog(
                                           onOk: () async {
-                                            print("sini");
+                                            printInfo(info: "sini");
                                             await controller
                                                 .removeProductFromCart(
                                                     data.id.toString())
@@ -72,6 +72,7 @@ class CartItem extends GetView<CartController> {
                                                   ),
                                                 ).then((value) async {
                                                   await controller.getProductCart();
+                                                  // ignore: use_build_context_synchronously
                                                   Navigator.pop(question);
                                                 });
                                               }

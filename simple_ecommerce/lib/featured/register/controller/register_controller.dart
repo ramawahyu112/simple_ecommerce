@@ -42,8 +42,7 @@ class RegisterController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
-    print("register controller close");
+    printInfo(info: "register controller close");
     super.onClose();
   }
 }

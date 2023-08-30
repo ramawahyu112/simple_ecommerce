@@ -7,7 +7,7 @@ abstract class LoginState extends Equatable {
 }
 
 class LoginSuccess extends LoginState {
-  LoginModel? data;
+  final LoginModel? data;
   LoginSuccess({required this.data});
 
   @override
@@ -15,7 +15,7 @@ class LoginSuccess extends LoginState {
 }
 
 class LoginFailed extends LoginState {
-  String? msg;
+  final String? msg;
   LoginFailed({required this.msg});
 
   @override

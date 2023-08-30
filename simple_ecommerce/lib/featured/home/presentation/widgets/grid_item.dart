@@ -17,7 +17,8 @@ class GridItem extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(sizeSmall)),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: sizeSmall, vertical: sizeSmall),
+        padding:
+            const EdgeInsets.symmetric(horizontal: sizeSmall, vertical: sizeSmall),
         child: InkWell(
           onTap: onItemTap,
           child: Column(

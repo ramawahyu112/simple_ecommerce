@@ -14,6 +14,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextType type;
   const CustomTextField({
+    super.key,
     required this.labelText,
     required this.controller,
     this.errorMessage,
@@ -26,7 +27,7 @@ class CustomTextField extends StatefulWidget {
   });
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {

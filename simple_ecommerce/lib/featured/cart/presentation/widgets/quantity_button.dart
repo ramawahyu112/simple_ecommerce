@@ -3,12 +3,9 @@ import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/featured/cart/controller/cart_controller.dart';
 
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/style.dart';
-
 class QuantityButton extends GetView<CartController> {
-  QuantityButton({super.key, required this.index});
-  int index;
+  const QuantityButton({super.key, required this.index});
+  final int index;
 
   void updateCart() async {
     final result = await controller.updateProductCart(index);

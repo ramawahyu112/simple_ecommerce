@@ -75,7 +75,7 @@ class FormRegister extends StatelessWidget {
                             );
                           } else if (state is RegisterFailed) {
                             loader.hide();
-                            final msg = (state as RegisterFailed).msg;
+                            final msg = state.msg;
                             Get.snackbar(
                               "Error",
                               msg.toString(),

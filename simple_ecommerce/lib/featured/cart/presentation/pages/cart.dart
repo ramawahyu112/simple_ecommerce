@@ -11,7 +11,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(isBack: true),
+      appBar: const CustomAppBar(isBack: true),
       body: SafeArea(
         child: GetBuilder<CartController>(
           builder: (controller) => Column(

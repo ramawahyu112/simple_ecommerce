@@ -24,12 +24,12 @@ class LoginPage extends StatelessWidget {
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: whiteColor,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(sizeLarge),
                       topRight: Radius.circular(sizeLarge))),
-              child: Padding(
+              child: const Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: sizeMedium, horizontal: sizeLarge),
                   child: FormLogin()),

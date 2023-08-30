@@ -11,7 +11,7 @@ class RegisterLoading extends RegisterState {
 }
 
 class RegisterSuccess extends RegisterState {
-  String? msg;
+  final String? msg;
   RegisterSuccess({required this.msg});
 
   @override
@@ -19,7 +19,7 @@ class RegisterSuccess extends RegisterState {
 }
 
 class RegisterFailed extends RegisterState {
-  String? msg;
+  final String? msg;
   RegisterFailed({required this.msg});
 
   @override

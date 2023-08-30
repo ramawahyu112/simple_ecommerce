@@ -19,7 +19,7 @@ class ProductDetailPage extends StatelessWidget {
         title: productModel.productName,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: sizeMedium),
+        padding: const EdgeInsets.symmetric(horizontal: sizeMedium),
         child: SingleChildScrollView(
           child: SizedBox(
             width: Get.width,

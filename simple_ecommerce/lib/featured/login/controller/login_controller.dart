@@ -35,8 +35,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
-    print("this close");
+    printInfo(info: "this close");
     super.onClose();
   }
 }

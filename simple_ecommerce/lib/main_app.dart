@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_ecommerce/core/presentation/widget/main_page.dart';
 import 'package:simple_ecommerce/core/utils/session_helper.dart';
-import 'package:simple_ecommerce/featured/home/presentation/pages/home.dart';
 import 'package:simple_ecommerce/featured/login/presentation/pages/login_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         getPages: routes(),
-        home: Session().getToken().isNotEmpty ? MainPage() : LoginPage(),
+        home: Session().getToken().isNotEmpty ? MainPage() : const LoginPage(),
       ),
     );
   }

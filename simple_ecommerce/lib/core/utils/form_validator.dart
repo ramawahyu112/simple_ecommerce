@@ -26,6 +26,7 @@ class CustomFormValidator {
         default:
           return null;
       }
+      return null;
     };
   }
 }

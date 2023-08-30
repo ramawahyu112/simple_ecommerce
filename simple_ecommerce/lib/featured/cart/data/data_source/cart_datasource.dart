@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart' hide FormData;
+import 'package:get/get.dart';
 import 'package:simple_ecommerce/featured/cart/data/model/cart_model.dart';
 import '../../../../core/utils/helper.dart';
 
@@ -15,7 +15,7 @@ class CartDataSource {
   Future<dynamic> addToCart(Map<String, dynamic> data) async {
     try {
       final response = await dioConnect.post("api/cart/addCart", data: data);
-      print(response.data['message']);
+      printInfo(info: response.data['message']);
       return response.data;
     } catch (e) {
       rethrow;
@@ -25,7 +25,7 @@ class CartDataSource {
   Future<dynamic> updateCart(Map<String, dynamic> data, int id) async {
     try {
       final response = await dioConnect.post("api/cart/updateCart/$id", data: data);
-      print(response.data['message']);
+      printInfo(info: response.data['message']);
       return response.statusCode == 200;
     } catch (e) {
       rethrow;

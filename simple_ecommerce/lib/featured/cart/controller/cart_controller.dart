@@ -27,7 +27,7 @@ class CartController extends GetxController {
         "quantity": quantity,
         "subtotal": subTotal,
       };
-      final result = await dataSource.addToCart(data);
+      await dataSource.addToCart(data);
       return true;
     } catch (e) {
       printError(info: "add product error : $e");

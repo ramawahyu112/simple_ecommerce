@@ -18,67 +18,70 @@ class ProductDetailPage extends StatelessWidget {
         isBack: true,
         title: productModel.productName,
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: Get.width,
-          // decoration: const BoxDecoration(
-          //     borderRadius: BorderRadius.only(
-          //         topRight: Radius.circular(paddingLarge),
-          //         topLeft: Radius.circular(paddingLarge))),
-          child: Padding(
-            padding: const EdgeInsets.all(sizeSmall),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Text(
-                  //   productModel.productName,
-                  //   style: headerTextStyle,
-                  // ),
-                  AspectRatio(
-                    aspectRatio: 1 / 1,
-                    child: Image.network(
-                      productModel.photo,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: sizeMedium),
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: Get.width,
+            // decoration: const BoxDecoration(
+            //     borderRadius: BorderRadius.only(
+            //         topRight: Radius.circular(paddingLarge),
+            //         topLeft: Radius.circular(paddingLarge))),
+            child: Padding(
+              padding: const EdgeInsets.all(sizeSmall),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Text(
+                    //   productModel.productName,
+                    //   style: headerTextStyle,
+                    // ),
+                    AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: Image.network(
+                        productModel.photo,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 100.w,
-                    height: 8.h,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return const Icon(
-                              Icons.star,
-                              color: orangeColor,
-                            );
-                          },
-                          itemCount: 5,
-                        ),
-                        const Text(
-                          "125 Reviews",
-                          style: startProductTextStyle,
-                        ),
-                      ],
+                    SizedBox(
+                      width: 100.w,
+                      height: 8.h,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return const Icon(
+                                Icons.star,
+                                color: orangeColor,
+                              );
+                            },
+                            itemCount: 5,
+                          ),
+                          const Text(
+                            "125 Reviews",
+                            style: startProductTextStyle,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Text(
-                    formatCurrency(productModel.price),
-                    style: productPriceTextStyle,
-                  ),
-                  smallVerticalSpacing(),
-                  Text(
-                    productModel.description,
-                    style: descriptionProductTextStyle,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  )
-                ]),
+                    Text(
+                      formatCurrency(productModel.price),
+                      style: productPriceTextStyle,
+                    ),
+                    smallVerticalSpacing(),
+                    Text(
+                      productModel.description,
+                      style: descriptionProductTextStyle,
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    )
+                  ]),
+            ),
           ),
         ),
       ),

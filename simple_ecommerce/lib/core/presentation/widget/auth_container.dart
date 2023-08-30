@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce/core/core.dart';
 
-import '../../../featured/home/presentation/widgets/bottom_navigation.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class AuthContainer extends StatelessWidget {
   const AuthContainer({
@@ -14,7 +14,9 @@ class AuthContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(color: orangeColor, child: body),
+        child: LoaderOverlay(
+            overlayColor: orangeColor,
+            child: Container(color: orangeColor, child: body)),
       ),
     );
   }

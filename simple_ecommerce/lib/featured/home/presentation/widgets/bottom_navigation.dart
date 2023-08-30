@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/core/static/colors.dart';
+import 'package:simple_ecommerce/core/utils/session_helper.dart';
 import 'package:simple_ecommerce/featured/home/controller/home_controller.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -41,6 +43,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
           items: navItem(),
           onTap: (value) {
             controller.changeIndex(value);
+            if (value == 4) {
+              Session().clearSession();
+              Get.offNamed(loginPage);
+            }
           },
           type: BottomNavigationBarType.fixed,
         ));

@@ -19,7 +19,8 @@ class CartController extends GetxController {
     }
   }
 
-  Future<bool> addProductToCart(String productId, String subTotal, {String quantity = "1"}) async {
+  Future<bool> addProductToCart(String productId, String subTotal,
+      {String quantity = "1"}) async {
     try {
       final data = {
         "product_id": productId,
@@ -29,6 +30,7 @@ class CartController extends GetxController {
       final result = await dataSource.addToCart(data);
       return true;
     } catch (e) {
+      printError(info: "add product error : $e");
       return false;
     }
   }
@@ -59,14 +61,16 @@ class CartController extends GetxController {
 
   void increment(int index) {
     listCart[index].quantity += 1;
-    listCart[index].subtotal = listCart[index].productModel.price * listCart[index].quantity;
+    listCart[index].subtotal =
+        listCart[index].productModel.price * listCart[index].quantity;
     listCart.refresh();
   }
 
   void decrement(int index) {
     if (listCart[index].quantity.isGreaterThan(0)) {
       listCart[index].quantity -= 1;
-      listCart[index].subtotal = listCart[index].productModel.price * listCart[index].quantity;
+      listCart[index].subtotal =
+          listCart[index].productModel.price * listCart[index].quantity;
     }
     listCart.refresh();
   }

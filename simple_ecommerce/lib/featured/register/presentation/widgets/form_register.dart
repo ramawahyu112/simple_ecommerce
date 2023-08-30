@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:simple_ecommerce/core/core.dart';
 import 'package:simple_ecommerce/core/presentation/custom_textfield.dart';
 import 'package:simple_ecommerce/core/presentation/widget/custom_alert.dart';
 import 'package:simple_ecommerce/core/presentation/widget/custom_button.dart';
 import 'package:simple_ecommerce/core/utils/form_validator.dart';
-import 'package:simple_ecommerce/featured/login/controller/login_controller.dart';
-import 'package:simple_ecommerce/featured/login/controller/state/login_state.dart';
+import 'package:simple_ecommerce/featured/register/controller/register_controller.dart';
+import 'package:simple_ecommerce/featured/register/controller/state/register_state.dart';
 
-class FormLogin extends StatelessWidget {
-  const FormLogin({super.key});
+class FormRegister extends StatelessWidget {
+  const FormRegister({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    final controller = Get.put(RegisterController());
     return
         // Obx(() =>
         Form(
-            key: controller.keyLogin,
+            key: controller.keyRegister,
             child: Column(
               children: [
                 largeVerticalSpacing(),
@@ -27,48 +28,54 @@ class FormLogin extends StatelessWidget {
                     type: TextType.none),
                 largeVerticalSpacing(),
                 CustomTextField(
+                    labelText: "Name",
+                    controller: controller.nameController,
+                    type: TextType.none),
+                largeVerticalSpacing(),
+                CustomTextField(
+                    labelText: "Email",
+                    controller: controller.emailController,
+                    type: TextType.email),
+                largeVerticalSpacing(),
+                CustomTextField(
                   labelText: "Password",
                   controller: controller.passwordController,
                   isPassword: true,
                   type: TextType.password,
                 ),
-                mediumVerticalSpacing(),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        "Forgot Password ?",
-                        style: normalText,
-                      )),
-                ),
                 largeVerticalSpacing(),
                 CustomButton(
                     onPressed: () {
-                      if (controller.keyLogin.currentState!.validate()) {
-                        controller.loginUser().then((state) {
-                          if (state is LoginSuccess) {
+                      if (controller.keyRegister.currentState!.validate()) {
+                        controller.registerUser().listen((state) {
+                          final loader = context.loaderOverlay;
+                          if (state is RegisterLoading) {
+                            loader.show();
+                          } else if (state is RegisterSuccess) {
+                            loader.hide();
+
                             showDialog(
                               context: context,
                               builder: (context) {
                                 return CustomAlert(
-                                  title: "Login Success",
-                                  message: "Click OK to Continue",
+                                  title: "Register Success",
+                                  message: "Click OK to Back Login",
                                   action: [
                                     SingleButtonDialog(
                                       buttonColor: greenColor,
                                       buttonText: "OK",
                                       onOk: () {
                                         controller.clearState();
-                                        Get.offAllNamed(mainPage);
+                                        Get.offAndToNamed(loginPage);
                                       },
                                     )
                                   ],
                                 );
                               },
                             );
-                          } else if (state is LoginFailed) {
-                            final msg = (state as LoginFailed).msg;
+                          } else if (state is RegisterFailed) {
+                            loader.hide();
+                            final msg = (state as RegisterFailed).msg;
                             Get.snackbar(
                               "Error",
                               msg.toString(),
@@ -80,7 +87,7 @@ class FormLogin extends StatelessWidget {
                       }
                     },
                     child: Text(
-                      "Login",
+                      "Register",
                       style: dialogButtonTextStyle,
                     )),
                 Expanded(
@@ -88,15 +95,15 @@ class FormLogin extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Dont have an account ? ",
+                      "Already have an account ? ",
                       style: normalText,
                     ),
                     GestureDetector(
                       onTap: () {
                         controller.clearState();
-                        Get.toNamed(registerPage);
+                        Get.offAndToNamed(loginPage);
                       },
-                      child: Text("Register", style: registerButtonTextStyle),
+                      child: Text("Login", style: registerButtonTextStyle),
                     )
                   ],
                 ))

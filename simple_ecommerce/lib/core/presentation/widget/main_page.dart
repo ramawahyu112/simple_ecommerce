@@ -14,8 +14,8 @@ class MainPage extends StatelessWidget {
     HomePage(),
     HomePage(),
     HomePage(),
-    LoginPage(),
-    LoginPage()
+    HomePage(),
+    HomePage(),
   ];
   MainPage({super.key});
 

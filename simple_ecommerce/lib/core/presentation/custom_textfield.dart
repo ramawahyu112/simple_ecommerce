@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce/core/core.dart';
 
+import '../utils/form_validator.dart';
+
 class CustomTextField extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
@@ -9,6 +11,8 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final String? Function(String?)? validator;
+  final TextType type;
   const CustomTextField({
     required this.labelText,
     required this.controller,
@@ -17,6 +21,8 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.prefixIcon,
     this.suffixIcon,
+    this.validator,
+    this.type = TextType.none,
   });
 
   @override
@@ -38,9 +44,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: normalText,
         ),
         const SizedBox(height: sizeSmall),
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: widget.isPassword ? _isObscured : false,
+          validator: widget.validator ??
+              CustomFormValidator(context: context, type: widget.type).validate(),
           decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.isPassword

@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
+    final controller = Get.put(HomeController());
     return Obx(
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
